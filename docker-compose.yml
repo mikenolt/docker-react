@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    mikenol-frontend:
+        #restart: always
+        # Must use quotes with no
+        #restart: 'no'
+        restart: on-failure
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"
+        volumes:
+            - "/app/node_modules"
+            - .:/app
+        stdin_open: true
+
+    mikenol-frontend-test:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        restart: on-failure
+        volumes:
+            - "/app/node_modules"
+            - .:/app
+        command: ["npm", "run", "test"]
+        stdin_open: true
+    
