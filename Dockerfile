@@ -24,6 +24,7 @@ RUN npm run build
 # Start run phase
 
 FROM nginx
+EXPOSE 80
 
 # Copy the build directory from npm run build to the nginx dir
 COPY --from=builder /app/build /usr/share/nginx/html
